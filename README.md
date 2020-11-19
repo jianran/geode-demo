@@ -4,7 +4,14 @@
    
 ```sh
 brew install apache-geode
+
 ```
+
+```sh
+curl https://downloads.apache.org/geode/1.11.0/apache-geode-1.11.0.tgz -O apache-geode-1.11.0.tgz
+tar -xvf apache-geode-1.1.0.tar -C path_to_product
+```
+
 或者选择源码编译安装，可能会编译报错，不建议
 
 ```sh
@@ -36,6 +43,7 @@ distributed cloud architecture：基于分布式云架构的内存数据存储�
 * pulse: admin/admin
 * [cq](https://geode.apache.org/docs/guide/16/developing/continuous_querying/how_continuous_querying_works.html)
 * pdx
+* [function](https://geode.apache.org/docs/guide/16/developing/function_exec/how_function_execution_works.html)
 
 # kv
 ```sh
