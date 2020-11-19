@@ -27,4 +27,4 @@ distributed cloud architecture：基于分布式云架构的内存存储系统�
 * 服务端函数代码注册与触发
 
 # component
-![ddd](https://github.com/jianran/geode-demo/commit/afc929eb24958323b31c8f1b25d043b84091bd92)
+![架构图](https://github.com/jianran/geode-demo/blob/master/geode-arch.png?raw=true)
