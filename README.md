@@ -30,7 +30,7 @@ distributed cloud architecture：基于分布式云架构的内存数据存储�
 * locator: 
 * server:
 * group:
-* region:
+* [region](https://geode.apache.org/docs/guide/16/developing/region_options/region_types.html):
 * partiion:
 * gfsh:
 * pulse: admin/admin
