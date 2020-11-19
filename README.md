@@ -20,7 +20,7 @@ distributed cloud architecture：基于分布式云架构的内存数据存储�
 
 * KV ： put/get
 * OQL ： 类sql查询
-* 事务管理
+* 强一致性事务保证
 * 二级索引及多种索引类型
 * 数据变更本地事件监听
 * 服务端函数代码注册与触发
