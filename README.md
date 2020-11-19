@@ -56,8 +56,9 @@ Region<String, String> region = cache.<String, String>createClientRegionFactory(
 
 # spring-data-gemfire
 
-* ClientCacheApplication
-
+* @ClientCacheApplication
+* @Region
+* @ContinuousQuery
 
 # others
 
