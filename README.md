@@ -47,6 +47,7 @@ put --region=regionA --key="1" --value="one"
 put --region=regionA --key="2" --value="two"
 query --query="select * from /regionA"
 start server --name=server2 --server-port=40412
+describe region --name=regionA
 ```
 # client
 
