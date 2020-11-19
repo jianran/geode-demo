@@ -34,6 +34,7 @@ distributed cloud architecture：基于分布式云架构的内存数据存储�
 * group:
 * region:
 * partiion:
+* cq
 * pdx
 
 # kv
@@ -46,5 +47,9 @@ put --region=regionA --key="2" --value="two"
 query --query="select * from /regionA"
 start server --name=server2 --server-port=40412
 ```
+
+# others
+
+[geode-example](https://github.com/apache/geode-examples)
 
 
