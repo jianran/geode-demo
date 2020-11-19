@@ -1,12 +1,11 @@
 # install
 
-如果已经安装brew，执行下列命令打包
+如果已经安装brew，执行下列命令直接方案，如果没有安装brew，执行install_brew.sh安装brew
    
 ```sh
 brew install apache-geode
 ```
-
-如果没有安装，可以选择源码编译
+或者选择源码编译安装，可能会编译报错，不建议
 
 ```sh
 git clone https://github.com/apache/geode.git
