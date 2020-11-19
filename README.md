@@ -28,7 +28,7 @@ distributed cloud architecture：基于分布式云架构的内存数据存储�
 
 # component
 ![架构图](https://github.com/jianran/geode-demo/blob/master/geode-arch.png?raw=true)
-* locator:
+* locator: 
 * server:
 * pulse: admin/admin
 * group:
@@ -47,9 +47,22 @@ put --region=regionA --key="2" --value="two"
 query --query="select * from /regionA"
 start server --name=server2 --server-port=40412
 ```
+# client
+
+```java
+ClientCache cache = new ClientCacheFactory().addPoolLocator("localhost", 10334).create();
+Region<String, String> region = cache.<String, String>createClientRegionFactory(ClientRegionShortcut.CACHING_PROXY).create("regionA");
+```
+
+# spring-data-gemfire
+
+* ClientCacheApplication
+
 
 # others
 
 [geode-example](https://github.com/apache/geode-examples)
+* 
+
 
 
