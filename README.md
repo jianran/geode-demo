@@ -10,7 +10,7 @@ brew install apache-geode
 
 ```sh
 git clone https://github.com/apache/geode.git
- ./gradlew build
+./gradlew build
 ```
 
 # intro
