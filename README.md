@@ -30,10 +30,11 @@ distributed cloud architecture：基于分布式云架构的内存数据存储�
 ![架构图](https://github.com/jianran/geode-demo/blob/master/geode-arch.png?raw=true)
 * locator: 
 * server:
-* pulse: admin/admin
 * group:
 * region:
 * partiion:
+* gfsh:
+* pulse: admin/admin
 * cq
 * pdx
 
@@ -63,7 +64,8 @@ Region<String, String> region = cache.<String, String>createClientRegionFactory(
 # others
 
 [geode-example](https://github.com/apache/geode-examples)
-* 
+
+* [Asynchronous Event Queues](https://github.com/apache/geode-examples/blob/develop/async/README.md)
 
 
 
