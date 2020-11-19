@@ -67,6 +67,6 @@ Region<String, String> region = cache.<String, String>createClientRegionFactory(
 
 * [partitioned](https://github.com/apache/geode-examples/blob/develop/partitioned/README.md)
 * [Asynchronous Event Queues](https://github.com/apache/geode-examples/blob/develop/async/README.md)
-
+* [functions](https://github.com/apache/geode-examples/tree/develop/functions)
 
 
