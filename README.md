@@ -34,7 +34,7 @@ distributed cloud architecture：基于分布式云架构的内存数据存储�
 * partiion:
 * gfsh:
 * pulse: admin/admin
-* cq
+* [cq](https://geode.apache.org/docs/guide/16/developing/continuous_querying/how_continuous_querying_works.html)
 * pdx
 
 # kv
