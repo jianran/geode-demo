@@ -19,8 +19,10 @@ import com.baeldung.springdatageode.service.AuthorService;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
+import java.util.Collection;
 import java.util.Optional;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 @SpringBootApplication
 @ClientCacheApplication(subscriptionEnabled = true)
@@ -28,7 +30,7 @@ import java.util.Random;
 @EnableIndexing
 @EnableGemfireRepositories(basePackageClasses = AuthorRepository.class)
 @ComponentScan(basePackageClasses = {AppController.class, AuthorService.class, Stater.class})
-@EnableClusterConfiguration(useHttp = true, requireHttps=false)
+@EnableClusterConfiguration
 @EnableContinuousQueries
 public class ClientCacheApp {
     
@@ -42,14 +44,17 @@ public class ClientCacheApp {
 class Stater implements ApplicationListener<ApplicationReadyEvent> {
 
     private final AuthorRepository authorRepository;
+    private final AverageAgeFunctionInvoker invoker;
+
 
     private static final String[] FIRST_NAME_DIC = "toarey peter fanhua simba java theia keke jeff tom".split(" ");
 
     private static final String[] LAST_NAME_DIC = "lee tan long smos lee ma pence cox trumo".split(" ");
 
 
-    Stater(AuthorRepository authorRepository) {
+    Stater(AuthorRepository authorRepository, AverageAgeFunctionInvoker invoker) {
         this.authorRepository = authorRepository;
+        this.invoker = invoker;
     }
 
     @Override
@@ -67,5 +72,12 @@ class Stater implements ApplicationListener<ApplicationReadyEvent> {
             Optional<Author> found = this.authorRepository.findById(saved.getId());
             Assert.notNull(found, "need found in database");
         }
+
+        Collection<Double> averages = this.invoker.average();
+        Double clusterAvergage = averages
+                .stream()
+                .collect(Collectors.averagingDouble(x -> x));
+
+        System.out.println("cluster average: " + clusterAvergage);
     }
 }
