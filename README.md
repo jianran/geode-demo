@@ -1,12 +1,18 @@
 # install
 
-如果已经安装brew，执行下列命令打包
+如果已经安装brew，执行下列命令直接方案，如果没有安装brew，执行install_brew.sh安装brew
    
 ```sh
 brew install apache-geode
+
 ```
 
-如果没有安装，可以选择源码编译
+```sh
+curl https://downloads.apache.org/geode/1.11.0/apache-geode-1.11.0.tgz -O apache-geode-1.11.0.tgz
+tar -xvf apache-geode-1.1.0.tar -C path_to_product
+```
+
+或者选择源码编译安装，可能会编译报错，不建议
 
 ```sh
 git clone https://github.com/apache/geode.git
@@ -21,20 +27,23 @@ distributed cloud architecture：基于分布式云架构的内存数据存储�
 
 * KV ： put/get
 * OQL ： 类sql查询
-* 事务管理
+* 强一致性事务保证
 * 二级索引及多种索引类型
 * 数据变更本地事件监听
 * 服务端函数代码注册与触发
 
 # component
 ![架构图](https://github.com/jianran/geode-demo/blob/master/geode-arch.png?raw=true)
-* locator:
+* locator: 
 * server:
-* pulse: admin/admin
 * group:
-* region:
+* [region](https://geode.apache.org/docs/guide/16/developing/region_options/region_types.html):
 * partiion:
+* gfsh:
+* pulse: admin/admin
+* [cq](https://geode.apache.org/docs/guide/16/developing/continuous_querying/how_continuous_querying_works.html)
 * pdx
+* [function](https://geode.apache.org/docs/guide/16/developing/function_exec/how_function_execution_works.html)
 
 # kv
 ```sh
@@ -45,6 +54,28 @@ put --region=regionA --key="1" --value="one"
 put --region=regionA --key="2" --value="two"
 query --query="select * from /regionA"
 start server --name=server2 --server-port=40412
+describe region --name=regionA
 ```
+# client
+
+```java
+ClientCache cache = new ClientCacheFactory().addPoolLocator("localhost", 10334).create();
+Region<String, String> region = cache.<String, String>createClientRegionFactory(ClientRegionShortcut.CACHING_PROXY).create("regionA");
+```
+
+# spring-data-gemfire
+
+* @ClientCacheApplication
+* @Region
+* @ContinuousQuery
+
+# others
+
+[geode-example](https://github.com/apache/geode-examples)
+
+* [partitioned](https://github.com/apache/geode-examples/blob/develop/partitioned/README.md)
+* [functions](https://github.com/apache/geode-examples/tree/develop/functions)
+* [Asynchronous Event Queues](https://github.com/apache/geode-examples/blob/develop/async/README.md)
+
 
 
