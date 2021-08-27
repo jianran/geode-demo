@@ -38,6 +38,42 @@ public class ClientCacheApp {
         SpringApplication.run(ClientCacheApp.class, args);
     }
     
+    @Bean
+    public ClientCache commonGeodeCache(String locatorHosts, int minConnection, int maxConnection, int timeout) {
+        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        ClientCacheFactory clientCacheFactory = new ClientCacheFactory();
+        if (locatorHosts != null) {
+            String[] locatorHostArray = locatorHosts.split(",");
+            if (locatorHostArray != null) {
+                for (String locator : locatorHostArray) {
+                    String host = locator.substring(0, locator.indexOf("["));
+                    Integer port = Integer.valueOf(locator.substring(locator.indexOf("[") + 1, locator.indexOf("]")));
+                    clientCacheFactory = clientCacheFactory.addPoolLocator(host, port);
+                }
+            }
+            if (timeout > 0) {
+                clientCacheFactory.setPoolReadTimeout(timeout);
+                clientCacheFactory.setPoolSocketConnectTimeout(timeout);
+            }
+            if (minConnection > 0) {
+                clientCacheFactory.setPoolMinConnections(minConnection);
+            }
+            if (maxConnection > 0) {
+                clientCacheFactory.setPoolMaxConnections(maxConnection);
+            }
+            clientCacheFactory.setPoolFreeConnectionTimeout(50);
+            clientCacheFactory.setPoolRetryAttempts(1);
+            clientCacheFactory.setPoolSubscriptionRedundancy(2);
+            clientCacheFactory.setPoolSubscriptionMessageTrackingTimeout(10000);
+            clientCacheFactory.setPoolPingInterval(60 * 1000);
+            clientCacheFactory.setPoolSubscriptionEnabled(true);
+            clientCacheFactory.setPoolSubscriptionAckInterval(60 * 1000);
+            clientCacheFactory.setPoolSocketBufferSize(1024 * 1024 * 8);
+            clientCacheFactory.setPdxSerializer(new ReflectionBasedAutoSerializer("com.*"));
+            return clientCacheFactory.create();
+        }
+    }
+    
 }
 
 @Component
